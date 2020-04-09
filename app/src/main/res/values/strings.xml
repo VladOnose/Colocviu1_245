@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Colocviu1_245MainActivity</string>
+    <string name="editableTextView"></string>
+    <string name="noneditableTextView"></string>
+    <string name="add_string">ADD</string>
+    <string name="compute_string">COMPUTE</string>
 </resources>
