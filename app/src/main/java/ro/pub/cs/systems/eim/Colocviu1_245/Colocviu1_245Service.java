@@ -43,6 +43,8 @@ public class Colocviu1_245Service extends Service {
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
+         int sum = intent.getExtras().getInt(Constants.TO_SERVICE);
+         ProcessingThread thread = new ProcessingThread(this, sum);
         return START_REDELIVER_INTENT;
     }
 

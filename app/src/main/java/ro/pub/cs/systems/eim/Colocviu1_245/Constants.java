@@ -9,4 +9,5 @@ public class Constants {
     public static int SECONDARY_REQ_CODE = 1;
 
     public static String FORM_SERVICE = "serv";
+    public static String TO_SERVICE = "sum";
 }

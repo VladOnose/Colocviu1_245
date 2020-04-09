@@ -16,10 +16,12 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
     Button addButton, computeButton;
     TextView nextTerm, allTerms;
 
+    boolean notServiced = true;
     boolean broughtFromMemory = false;
     int result = 0;
     String allTermsSaved = "";
     Colocviu1_245Service service;
+    Intent serviceIntent;
 
     protected void printResult(boolean fromMemory) {
         if (fromMemory) {
@@ -64,9 +66,12 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
                     intent.putExtra(Constants.COMPUTE_ME, allTerms.getText().toString());
                     startActivityForResult(intent, Constants.SECONDARY_REQ_CODE);
                 }
-                if (result > 10) {
-                    Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("ro.pub.cs.systems.eim.Colocviu1_245", "ro.pub.cs.systems.eim.Colocviu1_245.Colocviu1_245Service"));
+                if (result > 10 && notServiced) {
+                    notServiced = false;
+                    serviceIntent = new Intent();
+                    serviceIntent.setComponent(new ComponentName("ro.pub.cs.systems.eim.Colocviu1_245", "ro.pub.cs.systems.eim.Colocviu1_245.Colocviu1_245Service"));
+                    serviceIntent.putExtra(Constants.TO_SERVICE, result);
+                    startService(serviceIntent);
                 }
             }
         });
@@ -94,5 +99,11 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
             result = savedInstanceBundle.getInt(Constants.COMPUTED_VALUE);
             allTermsSaved = savedInstanceBundle.getString(Constants.SAVED_TERMS);
         }
+    }
+
+    protected  void onDestroy() {
+        super.onDestroy();
+        if (!notServiced)
+            stopService(serviceIntent);
     }
 }
