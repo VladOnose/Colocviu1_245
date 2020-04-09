@@ -1,1 +1,2 @@
-# Colocviu1_245
+Onose Vlad-Gabriel
+341C1
