@@ -3,6 +3,7 @@ package ro.pub.cs.systems.eim.Colocviu1_245;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.usage.ConfigurationStats;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
     boolean broughtFromMemory = false;
     int result = 0;
     String allTermsSaved = "";
+    Colocviu1_245Service service;
 
     protected void printResult(boolean fromMemory) {
         if (fromMemory) {
@@ -61,6 +63,11 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), Colocviu1_245SecondaryActivity.class);
                     intent.putExtra(Constants.COMPUTE_ME, allTerms.getText().toString());
                     startActivityForResult(intent, Constants.SECONDARY_REQ_CODE);
+                }
+                if (result > 10) {
+                    Intent intent = new Intent();
+                    service = new Colocviu1_245Service();
+                    intent.setComponent(new ComponentName("ro.pub.cs.systems.eim.Colocviu1_245", "ro.pub.cs.systems.eim.Colocviu1_245.Colocviu1_245Service"));
                 }
             }
         });
