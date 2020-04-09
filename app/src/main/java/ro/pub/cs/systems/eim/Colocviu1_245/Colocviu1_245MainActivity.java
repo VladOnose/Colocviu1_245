@@ -66,7 +66,6 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
                 }
                 if (result > 10) {
                     Intent intent = new Intent();
-                    service = new Colocviu1_245Service();
                     intent.setComponent(new ComponentName("ro.pub.cs.systems.eim.Colocviu1_245", "ro.pub.cs.systems.eim.Colocviu1_245.Colocviu1_245Service"));
                 }
             }
